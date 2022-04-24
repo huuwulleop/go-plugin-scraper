@@ -10,7 +10,7 @@ import (
 
 type Item struct {
 	Name   string `json:"name"`
-	Author string `json:"price"`
+	Author string `json:"author"`
 	Url    string `json:"url"`
 }
 
