@@ -19,6 +19,8 @@ func main() {
 		colly.AllowedDomains("forums.rpgmakerweb.com"),
 	)
 
+	items := make([]Item, 0)
+
 	c.OnHTML("div.structItem-cell--main", func(h *colly.HTMLElement) {
 		// name
 		fmt.Println(h.ChildText("div.structItem-title"))
@@ -28,7 +30,17 @@ func main() {
 		fmt.Println(h.ChildAttr("a[data-xf-init=preview-tooltip]", "href"))
 
 		fmt.Println()
+
+		item := Item{
+			Name:   h.ChildText("div.structItem-title"),
+			Author: h.ChildText("a[data-xf-init=member-tooltip]"),
+			Url:    h.ChildAttr("a[data-xf-init=preview-tooltip]", "href"),
+		}
+
+		items = append(items, item)
 	})
 
 	c.Visit("https://forums.rpgmakerweb.com/index.php?forums/rgss3-scripts-rmvx-ace.35/")
+
+	fmt.Println(items)
 }
