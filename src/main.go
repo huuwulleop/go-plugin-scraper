@@ -20,7 +20,9 @@ func main() {
 	)
 
 	c.OnHTML("div[data-author=IMP1]", func(h *colly.HTMLElement) {
-		fmt.Println(h.Text)
+		fmt.Println(h.ChildText("a[data-xf-init=preview-tooltip]"))
+		fmt.Println(h.ChildText("div.structItem-title"))
+		fmt.Println(h.ChildAttr("div.structItem-title", "href"))
 	})
 
 	c.Visit("https://forums.rpgmakerweb.com/index.php?forums/rgss3-scripts-rmvx-ace.35/")
