@@ -19,10 +19,15 @@ func main() {
 		colly.AllowedDomains("forums.rpgmakerweb.com"),
 	)
 
-	c.OnHTML("div[data-author=IMP1]", func(h *colly.HTMLElement) {
-		fmt.Println(h.ChildText("a[data-xf-init=preview-tooltip]"))
+	c.OnHTML("div.structItem-cell--main", func(h *colly.HTMLElement) {
+		// name
 		fmt.Println(h.ChildText("div.structItem-title"))
-		fmt.Println(h.ChildAttr("div.structItem-title", "href"))
+		// author
+		fmt.Println(h.ChildText("a[data-xf-init=member-tooltip]"))
+		// url
+		fmt.Println(h.ChildAttr("a[data-xf-init=preview-tooltip]", "href"))
+
+		fmt.Println()
 	})
 
 	c.Visit("https://forums.rpgmakerweb.com/index.php?forums/rgss3-scripts-rmvx-ace.35/")
