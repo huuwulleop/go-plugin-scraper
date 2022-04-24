@@ -1,7 +1,9 @@
 package main
 
 import (
+	"encoding/json"
 	"fmt"
+	"os"
 
 	"github.com/gocolly/colly"
 )
@@ -43,4 +45,12 @@ func main() {
 	c.Visit("https://forums.rpgmakerweb.com/index.php?forums/rgss3-scripts-rmvx-ace.35/")
 
 	fmt.Println(items)
+
+	content, err := json.Marshal(items)
+
+	if err != nil {
+		panic("Can't format to JSON!")
+	}
+
+	os.WriteFile("plugins.json", content, 0644)
 }
